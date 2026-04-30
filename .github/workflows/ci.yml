@@ -26,3 +26,6 @@ jobs:
 
     - name: Verify Python version
       run: python --version
+
+    - name: Run code quality checks
+      run: python -m flake8 app/

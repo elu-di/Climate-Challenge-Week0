@@ -7,11 +7,14 @@ from pathlib import Path
 st.set_page_config(page_title="Climate Dashboard", layout="wide")
 
 st.title("African Climate Comparison Dashboard")
-st.write("Interactive dashboard for comparing climate trends across countries.")
+st.write(
+    "Interactive dashboard for comparing climate trends across countries."
+)
 
 # Load data
 DATA_PATH = Path("data")
 files = list(DATA_PATH.glob("*_clean.csv"))
+
 
 @st.cache_data
 def load_data():
@@ -25,6 +28,7 @@ def load_data():
             df["Year"] = df["Date"].dt.year
         frames.append(df)
     return pd.concat(frames, ignore_index=True)
+
 
 if not files:
     st.warning("No cleaned CSV files found in data/ folder.")
@@ -85,5 +89,8 @@ st.subheader("Filtered Data Preview")
 st.dataframe(filtered_df.head())
 
 st.markdown("### Usage Instructions")
-st.markdown("- Select one or more countries from the sidebar.\n- Adjust the year range to zoom into a period.\n- Choose a variable to compare distributions.")
-
+st.markdown(
+    "- Select one or more countries from the sidebar.\n"
+    "- Adjust the year range to zoom into a period.\n"
+    "- Choose a variable to compare distributions."
+)
